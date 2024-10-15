@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
     ports:
-      - 5500:5000
+      - 5501:5000
     networks:
       - somenet
 
