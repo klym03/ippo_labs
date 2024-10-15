@@ -6,7 +6,7 @@ services:
     env_file:
       - ./.env
     ports:
-      - 5436:5432
+      - 5437:5432
     networks:
       - somenet
   bot:
