@@ -69,8 +69,13 @@ async def group(message: types.Message, state: FSMContext):
         data['group'] = message.text
     data = await state.get_data()
     await postgres_db.add_order(data['pdf_file'], data['variant'], data['group'], message.chat.id)
-    await bot.send_message(message.chat.id, 'Ваша заявка прийнята, менеджер звʼяжеться з вами найближчим часом',
+    username = message.from_user.username
+    if username:
+        await bot.send_message(message.chat.id, 'Ваша заявка прийнята, менеджер звʼяжеться з вами найближчим часом',
                            reply_markup=kb.ikb_client_back_to_main_menu())
+    else:
+        await bot.send_message(message.chat.id, 'Ваша заявка прийнята, оскільки у вас немає юзернейму, напишіть будь ласка менеджеру: @ippo_labs ',
+                               reply_markup=kb.ikb_client_back_to_main_menu())
     await bot.send_message(main_admin, f'Нова заявка на лабораторну роботу\n'
                                        f'Варіант: {data["variant"]}\n'
                                        f'Група: {data["group"]}\n'
