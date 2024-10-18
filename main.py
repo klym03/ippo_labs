@@ -1,7 +1,7 @@
 from database import postgres_db, db_table
 from aiogram.utils import executor
 from create_bot import dp
-from handlers import client
+from handlers import client,admin
 
 
 async def on_startup(_):
@@ -11,6 +11,6 @@ async def on_startup(_):
 
 
 client.register_handlers_client(dp)
-client.register_handlers_admin(dp)
+admin.register_handlers_admin(dp)
 
 executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
